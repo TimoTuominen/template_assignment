@@ -1,35 +1,43 @@
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
+app.use("/static", express.static("static")); //polku staattisille tiedostoille.
 
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); // Otetaan EJS käyttöön
 const bodyParser = require("body-parser");
-//const { json } = require("express/lib/response");
-
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); // Bodyparser POST tietojen käsittelyyn
 
 app.get("/", (req, res) => {
+  // Oletussivun lataus, joka myös lataa matrix leffan tiedot suoraan taulukkoon.
   async function Haetiedot() {
     let response = await fetch(
       `https://www.omdbapi.com/?apikey=bf626253&t=matrix`
     );
     let data = await response.json();
-    console.log(data);
-    res.render("index", data);
+    //console.log(data);
+    res.render("index", data); // Näytetään sivu EJS:ää käyttäen
   }
   Haetiedot();
 });
 
 app.post("/", (req, res) => {
-  async function githubUsers() {
+  // Formilla postattujen pyyntöjen haku OMDB:stä
+  let nimi = req.body.name;
+  async function Haetiedot2() {
     let response = await fetch(
-      `https://www.omdbapi.com/?apikey=bf626253&t=matrix`
+      `https://www.omdbapi.com/?apikey=bf626253&t=${nimi}`
     );
+
     let data = await response.json();
-    console.log(data);
+
     res.render("index", data);
   }
-  githubUsers();
+  Haetiedot2();
+});
+
+// Lopuksi käsitellään muut pyynnöt
+app.get("*", (req, res) => {
+  res.send("Nothing to see here...");
 });
 
 const port = process.env.PORT || 3000;
