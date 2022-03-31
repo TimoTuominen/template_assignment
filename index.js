@@ -29,8 +29,13 @@ app.post("/", (req, res) => {
     );
 
     let data = await response.json();
-
-    res.render("index", data);
+    console.log(data);
+    if (data.Response == "True") {
+      // Tarkastetaan löytyikö elokuva
+      res.render("index", data);
+    } else {
+      res.render("vaarahaku");
+    }
   }
   Haetiedot2();
 });

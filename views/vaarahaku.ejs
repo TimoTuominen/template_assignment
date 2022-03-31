@@ -11,28 +11,12 @@
       crossorigin="anonymous"
     />
 
-    <title>Template project</title>
-    <link rel="stylesheet" href="static/style.css" />
+    <title>Vaara haku</title>
   </head>
   <body>
     <div class="container">
-      <%- include ("./partials/navigation.ejs") %>
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="otsikko1">Welcome to OMDB search</h1>
-          <span>
-            <form id="form1" method="POST" action="/" name="submitform">
-              Name of the movie: <input id="name" type="text" name="name" />
-              <input id="painonappi" type="submit" value="Submit" />
-            </form>
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <p><%- include ("./partials/tulokset.ejs") %></p>
-        </div>
-      </div>
+      <h2>Kyseisellä nimellä ei löytynyt elokuvaa, kokeile toista nimeä</h2>
+      <a class="nav-link" href="/">Takaisin alkuun</a>
     </div>
     <script src="static/script.js"></script>
     <script
