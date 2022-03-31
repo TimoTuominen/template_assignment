@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
-const request = require("request");
 const fetch = require("node-fetch");
 
 app.set("view engine", "ejs");
 const bodyParser = require("body-parser");
-const { json } = require("express/lib/response");
+//const { json } = require("express/lib/response");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
